@@ -26,12 +26,12 @@ import net.slashie.utils.SerializableChecker;
 
 public abstract class SworeGame implements CommandListener, PlayerEventListener, Serializable{
 	//Configuration
-	private transient UserInterface ui;
+	protected transient UserInterface ui;
 	private transient UISelector uiSelector;
 	
-	private Dispatcher dispatcher;
-	private Player player;
-	private AbstractLevel currentLevel;
+	protected Dispatcher dispatcher;
+	protected Player player;
+	protected AbstractLevel currentLevel;
 	private boolean canSave;
 	
 	public void setCanSave(boolean vl){
@@ -44,9 +44,9 @@ public abstract class SworeGame implements CommandListener, PlayerEventListener,
 	
 	private Hashtable<String, AbstractLevel> storedLevels = new Hashtable<String, AbstractLevel>();
 	
-	private boolean endGame;
+	protected boolean endGame;
 	
-	private long turns;
+	protected long turns;
 	private Hashtable<String, LevelMetaData> hashMetadata = new Hashtable<String, LevelMetaData>();
 	
 	public void commandSelected (Command commandCode){
@@ -78,7 +78,7 @@ public abstract class SworeGame implements CommandListener, PlayerEventListener,
 	public abstract AbstractLevel createLevel(LevelMetaData levelMetadata);
 
 	
-	private void run(){
+	protected void run(){
 		player.setFOV(getNewFOV());
 		UserInterface.getUI().reset();
 		UserInterface.getUI().showMessage(getFirstMessage(player));
@@ -98,7 +98,7 @@ public abstract class SworeGame implements CommandListener, PlayerEventListener,
             if (actor == player)
             	beforePlayerAction();
             actor.beforeActing();
-            boolean acted = actor.act();
+            boolean acted = actor.act(); // This is a blocking operation. The game thread will wait til this changes
 			actor.afterActing();
 			if (acted && actor == player)
 				afterPlayerAction();
