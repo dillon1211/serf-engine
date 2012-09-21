@@ -25,6 +25,11 @@ public class STMusicManagerNew {
 		//midiPlayer = new MidisLoader();
 		STMidiPlayer midiPlayer = new STMidiPlayer();
 		currentMidiThread = new Thread(midiPlayer);
+		currentMidiThread.setPriority(Thread.MIN_PRIORITY);
+		currentMidiThread.setDaemon(true);
+	}
+	
+	public void start(){
 		currentMidiThread.start();
 	}
 	
