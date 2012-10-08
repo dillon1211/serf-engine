@@ -61,7 +61,7 @@ public class SwingSystemInterface implements Runnable{
 	
 	private JFrame frameMain;
 	private Point posClic;
-	private int frameRate;
+	//private int frameRate;
 
 	private CallbackKeyListener<Integer> inputQueueKeyListener;
 
@@ -181,7 +181,7 @@ public class SwingSystemInterface implements Runnable{
         });
 		
 		final SwingSystemInterface _si = this;
-		frameRate = (int)Math.round(1000.0d / (double)fps);
+		/*frameRate = (int)Math.round(1000.0d / (double)fps);
         Timer t = new Timer(frameRate, new ActionListener(){
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -191,7 +191,7 @@ public class SwingSystemInterface implements Runnable{
         		}
         	}
         });
-        t.start();
+        t.start();*/
 	}
 	
 	private boolean isFullScreen = false;
@@ -797,9 +797,9 @@ public class SwingSystemInterface implements Runnable{
 	}
 
 	
-	public int getFrameRate() {
+	/*public int getFrameRate() {
 		return frameRate;
-	}
+	}*/
 
 	
 	public int getTextWidth(int layer, String text) {
@@ -1108,6 +1108,9 @@ class SwingInterfacePanel extends JPanel{
 		/*layerImages[layer] =  getTransparentImage();
 		layerGraphics[layer] = layerImages[layer].getGraphics();*/
 		layerGraphics[layer].drawImage(drawingImages[layer], 0,0,this);
+
+		repaint(); // added
+
 		if (setUpdated)
 			setUpdated();
 	}

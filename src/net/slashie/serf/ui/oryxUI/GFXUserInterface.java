@@ -878,7 +878,7 @@ public abstract class GFXUserInterface extends UserInterface implements Runnable
 		
 		mapUpdateRunnable = new MapUpdateRunnable(mapLayer);
 		mapUpdateRunnable.setEnabled(false);
-		new Thread(mapUpdateRunnable).start();
+		//new Thread(mapUpdateRunnable).start();
 		
 		si.setVisible(true);
 	}

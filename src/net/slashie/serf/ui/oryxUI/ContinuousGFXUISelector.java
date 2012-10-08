@@ -179,14 +179,17 @@ public class ContinuousGFXUISelector extends GFXUISelector implements ActionSele
 				selectedMousePosition != null;
 	}
 	public Action selectAction(Actor who) {
+    	activate();
+    	if (ui().gameOver()){
+    		shutdown();
+    		return null;
+    	}
 	    while (true){
-	    	activate();
-	    	if (ui().gameOver()){
-	    		shutdown();
-	    		return null;
-	    	}
 	    	if (!hasPolling()){
-	    		Thread.yield();
+	    		try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+				}
 	    		continue;
 	    	}
 	    	deactivate();
